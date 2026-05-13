@@ -62,6 +62,12 @@ Final Cut Pro and Logic Pro are useful edges because they let DocuEngine stay sm
 
 See `docs/LIGHTWEIGHT_ARCHITECTURE.md` for the recommended workflow.
 
+## Google Drive Media Storage
+
+Large footage should live outside the repo. The recommended setup is Google Drive for desktop in **Stream files** mode, with DocuEngine storing only metadata, rights ledgers, clip indexes, and timelines locally.
+
+See `docs/GOOGLE_DRIVE_MEDIA.md`.
+
 ## Source Policy
 
 V1 source providers are:

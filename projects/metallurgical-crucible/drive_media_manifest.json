@@ -1,0 +1,25 @@
+{
+  "mode": "streamed_originals",
+  "project_slug": "metallurgical-crucible",
+  "drive_root": "~/GoogleDrive/My Drive",
+  "project_drive_dir": "~/GoogleDrive/My Drive/DocuEngine/metallurgical-crucible",
+  "originals_dir": "~/GoogleDrive/My Drive/DocuEngine/metallurgical-crucible/originals",
+  "proxies_dir": "~/GoogleDrive/My Drive/DocuEngine/metallurgical-crucible/proxies",
+  "exports_dir": "~/GoogleDrive/My Drive/DocuEngine/metallurgical-crucible/exports",
+  "repo_project_dir": "<REPO_ROOT>/projects/metallurgical-crucible",
+  "manifest_path": "<REPO_ROOT>/projects/metallurgical-crucible/drive_media_manifest.json",
+  "notes": [
+    "Configure Google Drive for desktop to Stream files, not Mirror files.",
+    "Store original footage in originals_dir; do not commit media to git.",
+    "Use low-resolution proxies for Final Cut Pro rough cuts when possible.",
+    "Expect opened Drive files to be cached locally while actively used by editing software."
+  ],
+  "status": "pending_drive_mount",
+  "drive_root_note": "Replace ACCOUNT/path after Google Drive for desktop is installed and visible in Finder.",
+  "media_policy": {
+    "originals": "Store full-resolution source footage in Google Drive originals_dir.",
+    "proxies": "Store low-resolution edit proxies in Google Drive proxies_dir or temporary local cache.",
+    "repo": "Commit only manifests, rights records, transcripts, clip indexes, and timelines.",
+    "final_cut": "Prefer proxy FCPXML for rough cuts; stage selected originals only for final conform."
+  }
+}
