@@ -12,6 +12,7 @@ DocuEngine is a local-first skeleton for an autonomous long-form documentary edi
 - Render-check helpers for `ffprobe`, `blackdetect`, and `loudnorm` validation.
 - A zero-dependency Final Cut Pro XML exporter for handing rough cuts to Final Cut Pro and Logic Pro.
 - A Google Drive media-ledger importer that registers cloud-backed footage without copying originals into the repo.
+- A metadata clip-index builder that turns registered Drive assets into rough searchable clips and a first timeline without downloading originals.
 - A demo CLI that writes project artifacts without requiring paid APIs or heavy video dependencies.
 
 ## Quick Start
@@ -40,6 +41,15 @@ python3 -m docuengine ingest-drive-ledger \
 
 The Drive importer updates `assets.json`, `rights_ledger.json`, `review_gates.json`, and `drive_ledger_ingest_report.json`. The actual footage can remain in Google Drive; DocuEngine stores Drive paths and rights metadata locally.
 
+Build a rough clip index and timeline from registered assets:
+
+```bash
+python3 -m docuengine build-clip-index \
+  --project-dir projects/metallurgical-crucible
+```
+
+This writes `clip_index.json`, refreshes `timeline.json`, and re-runs `review_gates.json`. It uses asset metadata first, so it remains lightweight until you add real scene detection or transcript sidecars.
+
 The demo writes:
 
 - `project.json`
@@ -62,6 +72,7 @@ The engine is intentionally modular:
 - `docuengine.sources`: source-provider metadata and query planning.
 - `docuengine.ingest`: local asset hashing, media typing, and transcript-to-clip conversion.
 - `docuengine.drive_ledger`: Google Drive Sheet CSV ingestion for cloud-backed media assets.
+- `docuengine.clip_index`: lightweight metadata-derived clip indexing.
 - `docuengine.planner`: clip scoring and OTIO-shaped timeline planning.
 - `docuengine.qa`: mandatory review gates before final render.
 - `docuengine.render_checks`: command builders and parsers for render QA.

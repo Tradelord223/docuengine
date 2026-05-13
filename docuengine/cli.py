@@ -4,8 +4,9 @@ import argparse
 import json
 from pathlib import Path
 
-from docuengine.fcpxml import build_fcpxml_document
+from docuengine.clip_index import build_clip_index
 from docuengine.drive_ledger import ingest_drive_ledger_csv
+from docuengine.fcpxml import build_fcpxml_document
 from docuengine.models import (
     BeatPlan,
     Citation,
@@ -47,6 +48,12 @@ def main(argv: list[str] | None = None) -> int:
     drive_ledger.add_argument("--project-dir", required=True, help="Project artifact directory")
     drive_ledger.add_argument("--ledger-csv", required=True, help="CSV export of the Google Drive media ledger")
 
+    clip_index = subparsers.add_parser(
+        "build-clip-index",
+        help="Build rough clip_index.json and timeline.json from registered source assets",
+    )
+    clip_index.add_argument("--project-dir", required=True, help="Project artifact directory")
+
     args = parser.parse_args(argv)
     if args.command == "demo":
         return _write_demo(Path(args.out), args.topic, args.duration)
@@ -59,6 +66,8 @@ def main(argv: list[str] | None = None) -> int:
         )
     if args.command == "ingest-drive-ledger":
         return _ingest_drive_ledger(Path(args.project_dir), Path(args.ledger_csv))
+    if args.command == "build-clip-index":
+        return _build_clip_index(Path(args.project_dir))
     return 2
 
 
@@ -186,6 +195,24 @@ def _ingest_drive_ledger(project_dir: Path, ledger_csv: Path) -> int:
             "asset_count": len(result.assets),
             "skipped_rows": result.skipped_rows,
         },
+    }
+    for filename, payload in artifacts.items():
+        (project_dir / filename).write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    return 0
+
+
+def _build_clip_index(project_dir: Path) -> int:
+    project = _project_from_dict(_read_json(project_dir / "project.json"))
+    assets = _read_assets_if_present(project_dir / "assets.json")
+    beats = [_beat_from_dict(item) for item in _read_json(project_dir / "beat_plan.json")]
+    clips = build_clip_index(project, assets, beats)
+    timeline = plan_timeline(project, beats, clips)
+    gates = run_quality_gates(project, assets, timeline, beats)
+
+    artifacts = {
+        "clip_index.json": to_dict(clips),
+        "timeline.json": to_dict(timeline),
+        "review_gates.json": to_dict(gates),
     }
     for filename, payload in artifacts.items():
         (project_dir / filename).write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")

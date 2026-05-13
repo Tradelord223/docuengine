@@ -17,3 +17,10 @@ python3 -m docuengine ingest-drive-ledger \
   --project-dir projects/metallurgical-crucible \
   --ledger-csv /path/to/media-ledger-export.csv
 ```
+
+Then build the rough clip index and refreshed timeline:
+
+```bash
+python3 -m docuengine build-clip-index \
+  --project-dir projects/metallurgical-crucible
+```
