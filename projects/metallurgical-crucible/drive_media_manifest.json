@@ -21,5 +21,12 @@
     "proxies": "Store low-resolution edit proxies in Google Drive proxies_dir or temporary local cache.",
     "repo": "Commit only manifests, rights records, transcripts, clip indexes, and timelines.",
     "final_cut": "Prefer proxy FCPXML for rough cuts; stage selected originals only for final conform."
+  },
+  "google_drive_connector": {
+    "account_email": "you@example.com",
+    "media_ledger_title": "DocuEngine - Metallurgical Crucible Media Ledger",
+    "media_ledger_file_id": "<GOOGLE_SHEET_ID>",
+    "media_ledger_url": "https://docs.google.com/spreadsheets/d/<GOOGLE_SHEET_ID>/edit",
+    "connector_limitation": "Current connector can create and edit Docs/Sheets/Slides, but does not expose Drive folder creation or arbitrary video upload. Use Drive for desktop/Finder to create media folders and place large footage."
   }
 }
