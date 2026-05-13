@@ -37,7 +37,42 @@
       "observed_contents": "Python engine source files; not the footage media library folder tree.",
       "use_for_media_ingestion": false
     },
-    "required_media_folder_status": "not_found_in_drive_search",
+    "required_media_folder_status": "partial_project_root_found_subfolders_not_visible",
     "required_media_folder_tree": "DocuEngine/metallurgical-crucible/{originals,proxies,exports}"
+  },
+  "google_drive_project": {
+    "title": "Long Format Video Engine",
+    "id": "<DRIVE_PROJECT_ID>",
+    "url": "https://drive.google.com/drive/project/<DRIVE_PROJECT_ID>",
+    "mime_type": "application/vnd.google-apps.project",
+    "note": "Drive project is visible at My Drive root, but the current connector cannot list project contents as a folder."
+  },
+  "google_drive_media_folders": {
+    "docuengine_root": {
+      "title": "DocuEngine",
+      "folder_id": "<DRIVE_FOLDER_ID>",
+      "url": "https://drive.google.com/drive/folders/<DRIVE_FOLDER_ID>"
+    },
+    "project_root": {
+      "title": "metallurgical-crucible",
+      "folder_id": "<DRIVE_FOLDER_ID>",
+      "url": "https://drive.google.com/drive/folders/<DRIVE_FOLDER_ID>"
+    },
+    "originals": {
+      "status": "not_visible_to_connector",
+      "expected_path": "DocuEngine/metallurgical-crucible/originals"
+    },
+    "proxies": {
+      "status": "not_visible_to_connector",
+      "expected_path": "DocuEngine/metallurgical-crucible/proxies"
+    },
+    "exports": {
+      "status": "not_visible_to_connector",
+      "expected_path": "DocuEngine/metallurgical-crucible/exports"
+    },
+    "observed_project_root_contents": [
+      "UPLOAD_INSTRUCTIONS.txt"
+    ],
+    "next_upload_note": "Local upload tree now includes README.txt files inside originals/proxies/exports so those subfolders should upload visibly."
   }
 }
