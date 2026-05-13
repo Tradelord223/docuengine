@@ -1,0 +1,83 @@
+# DocuEngine
+
+DocuEngine is a local-first skeleton for an autonomous long-form documentary editing engine. It is built around a practical hybrid workflow: use rights-cleared real footage as the primary material, use LLM planning for research and edit decisions, and reserve generative video for short inserts or missing shots that pass approval gates.
+
+## What This Implements
+
+- Stable public objects for `ProjectSpec`, `RightsRecord`, `SourceAsset`, `ClipSegment`, `BeatPlan`, `TimelinePlan`, and `ReviewGate`.
+- A rights policy that defaults to public-domain, permissive, user-owned, and explicitly permitted assets.
+- A hard YouTube safety rule: YouTube assets are blocked unless marked as user-owned, explicitly permitted, or service-authorized.
+- Clip scoring and timeline planning that produces an OTIO-shaped JSON timeline.
+- QA gates for rights ledger, missing media, citation coverage, timeline integrity, duplicate clip overuse, and unsafe operational detail.
+- Render-check helpers for `ffprobe`, `blackdetect`, and `loudnorm` validation.
+- A zero-dependency Final Cut Pro XML exporter for handing rough cuts to Final Cut Pro and Logic Pro.
+- A demo CLI that writes project artifacts without requiring paid APIs or heavy video dependencies.
+
+## Quick Start
+
+```bash
+python3 -m docuengine demo --out /tmp/docuengine-demo --topic "radar deception in modern warfare"
+```
+
+Export a rough-cut timeline for Final Cut Pro:
+
+```bash
+python3 -m docuengine export-fcpxml \
+  --project /tmp/docuengine-demo/project.json \
+  --assets /tmp/docuengine-demo/assets.json \
+  --timeline /tmp/docuengine-demo/timeline.json \
+  --out /tmp/docuengine-demo/project.fcpxml
+```
+
+The demo writes:
+
+- `project.json`
+- `assets.json`
+- `rights_ledger.json`
+- `clip_index.json`
+- `beat_plan.json`
+- `timeline.json`
+- `review_gates.json`
+- `source_queries.json`
+
+The demo media is a placeholder. Replace it with a real rights-cleared clip before rendering.
+
+## Architecture
+
+The engine is intentionally modular:
+
+- `docuengine.models`: typed project, source, clip, timeline, and review objects.
+- `docuengine.policy`: provider/license validation and approval actions.
+- `docuengine.sources`: source-provider metadata and query planning.
+- `docuengine.ingest`: local asset hashing, media typing, and transcript-to-clip conversion.
+- `docuengine.planner`: clip scoring and OTIO-shaped timeline planning.
+- `docuengine.qa`: mandatory review gates before final render.
+- `docuengine.render_checks`: command builders and parsers for render QA.
+- `docuengine.fcpxml`: minimal Final Cut Pro XML export.
+- `docuengine.cli`: local artifact generation.
+
+## Final Cut Pro And Logic Pro
+
+Final Cut Pro and Logic Pro are useful edges because they let DocuEngine stay small. The engine should make edit decisions and export `.fcpxml`; Final Cut Pro handles finishing, and Logic Pro handles audio cleanup/mix work through Final Cut Pro XML interchange.
+
+See `docs/LIGHTWEIGHT_ARCHITECTURE.md` for the recommended workflow.
+
+## Source Policy
+
+V1 source providers are:
+
+- DVIDS
+- National Archives
+- NASA media
+- Wikimedia Commons
+- Pexels
+- Internet Archive
+- User-owned uploads
+
+Each asset must keep a rights ledger with source URL, license, attribution, restrictions, allowed usage, and download date.
+
+## Tests
+
+```bash
+python3 -m unittest discover
+```
