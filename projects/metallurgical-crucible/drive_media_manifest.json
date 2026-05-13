@@ -28,5 +28,16 @@
     "media_ledger_file_id": "<GOOGLE_SHEET_ID>",
     "media_ledger_url": "https://docs.google.com/spreadsheets/d/<GOOGLE_SHEET_ID>/edit",
     "connector_limitation": "Current connector can create and edit Docs/Sheets/Slides, but does not expose Drive folder creation or arbitrary video upload. Use Drive for desktop/Finder to create media folders and place large footage."
+  },
+  "detected_drive_uploads": {
+    "code_folder": {
+      "title": "docuengine",
+      "folder_id": "<DRIVE_FOLDER_ID>",
+      "url": "https://drive.google.com/drive/folders/<DRIVE_FOLDER_ID>",
+      "observed_contents": "Python engine source files; not the footage media library folder tree.",
+      "use_for_media_ingestion": false
+    },
+    "required_media_folder_status": "not_found_in_drive_search",
+    "required_media_folder_tree": "DocuEngine/metallurgical-crucible/{originals,proxies,exports}"
   }
 }
