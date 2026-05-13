@@ -11,6 +11,7 @@ DocuEngine is a local-first skeleton for an autonomous long-form documentary edi
 - QA gates for rights ledger, missing media, citation coverage, timeline integrity, duplicate clip overuse, and unsafe operational detail.
 - Render-check helpers for `ffprobe`, `blackdetect`, and `loudnorm` validation.
 - A zero-dependency Final Cut Pro XML exporter for handing rough cuts to Final Cut Pro and Logic Pro.
+- A Google Drive media-ledger importer that registers cloud-backed footage without copying originals into the repo.
 - A demo CLI that writes project artifacts without requiring paid APIs or heavy video dependencies.
 
 ## Quick Start
@@ -28,6 +29,16 @@ python3 -m docuengine export-fcpxml \
   --timeline /tmp/docuengine-demo/timeline.json \
   --out /tmp/docuengine-demo/project.fcpxml
 ```
+
+Import a Google Drive media ledger CSV:
+
+```bash
+python3 -m docuengine ingest-drive-ledger \
+  --project-dir projects/metallurgical-crucible \
+  --ledger-csv /path/to/media-ledger-export.csv
+```
+
+The Drive importer updates `assets.json`, `rights_ledger.json`, `review_gates.json`, and `drive_ledger_ingest_report.json`. The actual footage can remain in Google Drive; DocuEngine stores Drive paths and rights metadata locally.
 
 The demo writes:
 
@@ -50,6 +61,7 @@ The engine is intentionally modular:
 - `docuengine.policy`: provider/license validation and approval actions.
 - `docuengine.sources`: source-provider metadata and query planning.
 - `docuengine.ingest`: local asset hashing, media typing, and transcript-to-clip conversion.
+- `docuengine.drive_ledger`: Google Drive Sheet CSV ingestion for cloud-backed media assets.
 - `docuengine.planner`: clip scoring and OTIO-shaped timeline planning.
 - `docuengine.qa`: mandatory review gates before final render.
 - `docuengine.render_checks`: command builders and parsers for render QA.

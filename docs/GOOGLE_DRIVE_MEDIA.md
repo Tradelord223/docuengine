@@ -65,3 +65,29 @@ Final Cut Pro works best with real file paths. A Drive-streamed file path can wo
 - Treat Drive original paths as source-of-truth references.
 - Treat local paths as temporary cache/staging unless explicitly marked otherwise.
 
+## Register Drive Footage From The Ledger
+
+After adding rows to the Drive media ledger, export the Sheet tab as CSV and run:
+
+```bash
+python3 -m docuengine ingest-drive-ledger \
+  --project-dir projects/metallurgical-crucible \
+  --ledger-csv /path/to/media-ledger-export.csv
+```
+
+Rows are ingested only when `Status` is `ready`, `approved`, `ingest`, `ingest_ready`, or `selected`. Rows still marked `needed`, `pending`, or blank are skipped and recorded in `drive_ledger_ingest_report.json`.
+
+Expected ledger columns:
+
+- `Asset ID`
+- `Status`
+- `Provider`
+- `Source URL`
+- `Drive Original Path`
+- `Drive Proxy Path`
+- `Rights Status`
+- `Attribution`
+- `Beat/Use`
+- `Notes`
+
+Cloud-backed assets pass the missing-media gate when they include a Drive original path, Drive proxy path, Drive file ID, or `My Drive/` path. Final Cut Pro may still download/cache selected media when opening an edit.

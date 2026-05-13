@@ -9,3 +9,11 @@ Start with `research_brief.md`, `narration_script.md`, `source_queries.json`, an
 Footage storage should use Google Drive for desktop in Stream mode. See `drive_media_manifest.json` for the intended Drive layout and `../../docs/GOOGLE_DRIVE_MEDIA.md` for the workflow.
 
 Drive-side control ledger: https://docs.google.com/spreadsheets/d/<GOOGLE_SHEET_ID>/edit
+
+When footage rows are ready in the ledger, export the Sheet tab as CSV and run:
+
+```bash
+python3 -m docuengine ingest-drive-ledger \
+  --project-dir projects/metallurgical-crucible \
+  --ledger-csv /path/to/media-ledger-export.csv
+```

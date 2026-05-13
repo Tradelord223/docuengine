@@ -5,10 +5,13 @@ import json
 from pathlib import Path
 
 from docuengine.fcpxml import build_fcpxml_document
+from docuengine.drive_ledger import ingest_drive_ledger_csv
 from docuengine.models import (
     BeatPlan,
     Citation,
+    GeneratedInsert,
     ClipSegment,
+    Overlay,
     ProjectSpec,
     RightsRecord,
     SourceAsset,
@@ -37,6 +40,13 @@ def main(argv: list[str] | None = None) -> int:
     fcpxml.add_argument("--timeline", required=True, help="Path to timeline.json")
     fcpxml.add_argument("--out", required=True, help="Path to write .fcpxml")
 
+    drive_ledger = subparsers.add_parser(
+        "ingest-drive-ledger",
+        help="Import a Google Drive media ledger CSV into project assets and rights records",
+    )
+    drive_ledger.add_argument("--project-dir", required=True, help="Project artifact directory")
+    drive_ledger.add_argument("--ledger-csv", required=True, help="CSV export of the Google Drive media ledger")
+
     args = parser.parse_args(argv)
     if args.command == "demo":
         return _write_demo(Path(args.out), args.topic, args.duration)
@@ -47,6 +57,8 @@ def main(argv: list[str] | None = None) -> int:
             Path(args.timeline),
             Path(args.out),
         )
+    if args.command == "ingest-drive-ledger":
+        return _ingest_drive_ledger(Path(args.project_dir), Path(args.ledger_csv))
     return 2
 
 
@@ -156,6 +168,43 @@ def _export_fcpxml(project_path: Path, assets_path: Path, timeline_path: Path, o
     return 0
 
 
+def _ingest_drive_ledger(project_dir: Path, ledger_csv: Path) -> int:
+    project = _project_from_dict(_read_json(project_dir / "project.json"))
+    beats = [_beat_from_dict(item) for item in _read_json(project_dir / "beat_plan.json")]
+    timeline = _timeline_from_dict(_read_json(project_dir / "timeline.json"))
+    existing_assets = _read_assets_if_present(project_dir / "assets.json")
+    result = ingest_drive_ledger_csv(ledger_csv)
+    assets = _merge_assets(existing_assets, result.assets)
+    gates = run_quality_gates(project, assets, timeline, beats)
+
+    artifacts = {
+        "assets.json": to_dict(assets),
+        "rights_ledger.json": to_dict([asset.rights for asset in assets if asset.rights]),
+        "review_gates.json": to_dict(gates),
+        "drive_ledger_ingest_report.json": {
+            "ledger_csv": str(ledger_csv),
+            "asset_count": len(result.assets),
+            "skipped_rows": result.skipped_rows,
+        },
+    }
+    for filename, payload in artifacts.items():
+        (project_dir / filename).write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    return 0
+
+
+def _read_assets_if_present(path: Path) -> list[SourceAsset]:
+    if not path.exists():
+        return []
+    return [_asset_from_dict(item) for item in _read_json(path)]
+
+
+def _merge_assets(existing: list[SourceAsset], incoming: list[SourceAsset]) -> list[SourceAsset]:
+    merged = {asset.id: asset for asset in existing}
+    for asset in incoming:
+        merged[asset.id] = asset
+    return list(merged.values())
+
+
 def _read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -174,6 +223,16 @@ def _asset_from_dict(data: dict) -> SourceAsset:
     return SourceAsset(**payload)
 
 
+def _citation_from_dict(data: dict) -> Citation:
+    return Citation(**data)
+
+
+def _beat_from_dict(data: dict) -> BeatPlan:
+    payload = dict(data)
+    payload["citations"] = [_citation_from_dict(item) for item in payload.get("citations", [])]
+    return BeatPlan(**payload)
+
+
 def _timeline_clip_from_dict(data: dict) -> TimelineClip:
     return TimelineClip(**data)
 
@@ -184,9 +243,21 @@ def _track_from_dict(data: dict) -> TimelineTrack:
     return TimelineTrack(**payload)
 
 
+def _overlay_from_dict(data: dict) -> Overlay:
+    return Overlay(**data)
+
+
+def _generated_insert_from_dict(data: dict) -> GeneratedInsert:
+    return GeneratedInsert(**data)
+
+
 def _timeline_from_dict(data: dict) -> TimelinePlan:
     payload = dict(data)
     payload["tracks"] = [_track_from_dict(item) for item in payload.get("tracks", [])]
+    payload["overlays"] = [_overlay_from_dict(item) for item in payload.get("overlays", [])]
+    payload["generated_inserts"] = [
+        _generated_insert_from_dict(item) for item in payload.get("generated_inserts", [])
+    ]
     return TimelinePlan(**payload)
 
 

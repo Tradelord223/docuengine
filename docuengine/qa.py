@@ -50,8 +50,12 @@ def run_quality_gates(
     missing = [
         f"{asset.id}: {asset.local_path}"
         for asset in assets
-        if asset.local_path and not Path(asset.local_path).exists()
+        if asset.local_path and not _is_cloud_backed(asset) and not Path(asset.local_path).exists()
     ]
+    cloud_backed = [asset.id for asset in assets if _is_cloud_backed(asset)]
+    missing_notes = missing or ["All referenced local media paths exist"]
+    if cloud_backed and not missing:
+        missing_notes = [f"{len(cloud_backed)} cloud-backed media asset(s) registered; local existence not required"]
     gates.append(
         ReviewGate(
             gate_type="missing_media",
@@ -59,7 +63,7 @@ def run_quality_gates(
             decision="blocked" if missing else "passed",
             approver="system",
             timestamp=now,
-            notes=missing or ["All referenced local media paths exist"],
+            notes=missing_notes,
         )
     )
 
@@ -141,3 +145,14 @@ def _unsafe_operational_detail(beats: list[BeatPlan]) -> list[str]:
             if phrase in haystack:
                 findings.append(f"{beat.id}: contains '{phrase}'")
     return findings
+
+
+def _is_cloud_backed(asset: SourceAsset) -> bool:
+    metadata = asset.metadata or {}
+    return metadata.get("storage") == "google_drive" and bool(
+        metadata.get("drive_original_path")
+        or metadata.get("drive_proxy_path")
+        or metadata.get("drive_file_id")
+        or asset.local_path.startswith("gdrive://")
+        or asset.local_path.startswith("My Drive/")
+    )
