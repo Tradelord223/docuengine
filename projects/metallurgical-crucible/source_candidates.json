@@ -1,0 +1,58 @@
+[
+  {
+    "id": "science-museum-stainless",
+    "use": "Fact source and possible image lead for stainless steel sequence",
+    "url": "https://blog.sciencemuseum.org.uk/100-years-of-stainless-steel/",
+    "rights_status": "research_only_until_asset_license_checked",
+    "notes": "Science Museum page confirms August 1913 Brearley framing and chromium passive film explanation."
+  },
+  {
+    "id": "frank-whittle-nimonic",
+    "use": "Fact source for Whittle material challenge and Nimonic 80",
+    "url": "https://frankwhittle.co.uk/challenges/",
+    "rights_status": "research_only_until_asset_license_checked",
+    "notes": "Use as citation; obtain imagery separately from open collections or licensed source."
+  },
+  {
+    "id": "usaf-jumo-004",
+    "use": "Jumo 004 facts and possible public-domain image download",
+    "url": "https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/196238/AFmuseum/junkers-jumo-004-turbojet/",
+    "rights_status": "likely_us_government_public_domain_but_verify_each_download",
+    "notes": "USAF museum page has hi-res photo link and key engine facts."
+  },
+  {
+    "id": "doe-met-lab",
+    "use": "Met Lab / CP-1 / plutonium production fact source",
+    "url": "https://www.energy.gov/lm/metallurgical-laboratory-university-chicago",
+    "rights_status": "likely_us_government_public_domain_but_verify_each_download",
+    "notes": "Good citation for Met Lab role; use DOE/Argonne images where rights allow."
+  },
+  {
+    "id": "nps-plutonium",
+    "use": "Hanford and plutonium production fact source",
+    "url": "https://www.nps.gov/mapr/learn/plutonium.htm",
+    "rights_status": "likely_us_government_public_domain_but_verify_each_download",
+    "notes": "Good for Hanford T Plant and X-10 context."
+  },
+  {
+    "id": "arxiv-plutonium-metallurgy",
+    "use": "Technical citation for plutonium phases and gallium stabilization",
+    "url": "https://arxiv.org/abs/2103.06226",
+    "rights_status": "citation_only",
+    "notes": "Use for script accuracy; visuals should be custom animation or open diagrams."
+  },
+  {
+    "id": "smithsonian-sr71",
+    "use": "SR-71 facts and open-access imagery",
+    "url": "https://airandspace.si.edu/collection-objects/lockheed-sr-71-blackbird/nasm_A19920072000",
+    "rights_status": "smithsonian_open_access_cc0_for_object_page_assets_where_marked",
+    "notes": "Object page states Open Access CCO; still preserve source attribution."
+  },
+  {
+    "id": "cia-a12-oxcart",
+    "use": "A-12 origin, titanium fabrication, Mach 3.2 at 90000 ft",
+    "url": "https://www.cia.gov/legacy/headquarters/a-12-oxcart/",
+    "rights_status": "likely_us_government_public_domain_but_verify_each_download",
+    "notes": "Good citation for OXCART context and titanium fabrication."
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "area": "source_assets",
+    "status": "blocked",
+    "detail": "No rights-cleared local media has been ingested yet."
+  },
+  {
+    "area": "actual_clipping",
+    "status": "blocked",
+    "detail": "Requires footage plus PySceneDetect/WhisperX or manual clip markers."
+  },
+  {
+    "area": "fcpxml_export",
+    "status": "blocked",
+    "detail": "Wait until local SourceAsset records exist."
+  },
+  {
+    "area": "voice_music_render",
+    "status": "not_started",
+    "detail": "Narration, music, and mix workflow not generated in this package."
+  },
+  {
+    "area": "fact_check",
+    "status": "draft",
+    "detail": "Core claims have citations; exact script language still needs source-by-source fact pass before narration recording."
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "beat_id": "cold-open-crucible",
+    "shot": "Macro molten metal pour into black frame, hard cut to microscope grain structure.",
+    "source_strategy": "licensed stock or generated macro insert"
+  },
+  {
+    "beat_id": "stainless-sheffield",
+    "shot": "Sheffield steelworks archival skyline, Brearley portrait, stainless knife close-up.",
+    "source_strategy": "Science Museum / Sheffield collections / Wikimedia rights check"
+  },
+  {
+    "beat_id": "stainless-sheffield",
+    "shot": "3D chromium oxide passive layer forming and self-healing after a scratch.",
+    "source_strategy": "generated animation"
+  },
+  {
+    "beat_id": "jet-superalloys",
+    "shot": "Whittle engine and Jumo 004 cross-section comparison.",
+    "source_strategy": "museum open access images plus animated diagram"
+  },
+  {
+    "beat_id": "jet-superalloys",
+    "shot": "Turbine blade glowing under heat, creep stress overlay.",
+    "source_strategy": "generated animation or licensed technical stock"
+  },
+  {
+    "beat_id": "atomic-metallurgy",
+    "shot": "Chicago Pile-1 / Stagg Field archival, Hanford T Plant exterior.",
+    "source_strategy": "DOE / NPS / National Archives"
+  },
+  {
+    "beat_id": "atomic-metallurgy",
+    "shot": "Plutonium phase morphing abstract lattice, no weapon assembly details.",
+    "source_strategy": "generated safe abstract animation"
+  },
+  {
+    "beat_id": "titanium-phantom",
+    "shot": "SR-71 on museum floor, pressure suit, inlet cones, aerial refueling.",
+    "source_strategy": "Smithsonian Open Access / NASA / USAF"
+  },
+  {
+    "beat_id": "titanium-phantom",
+    "shot": "Thermal expansion visualization: cold gaps closing during Mach 3 flight.",
+    "source_strategy": "generated animation"
+  },
+  {
+    "beat_id": "legacy-modern-alloys",
+    "shot": "Modern turbine blades, surgical steel, titanium implant, spacecraft bracket montage.",
+    "source_strategy": "licensed stock, NASA, Wikimedia, generated transitions"
+  }
+]

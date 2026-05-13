@@ -1,0 +1,198 @@
+[
+  {
+    "id": "cold-open-crucible",
+    "chapter": "Cold Open: The Furnace Behind War",
+    "claim": "The decisive constraint behind many military breakthroughs was not strategy alone, but whether materials could survive heat, corrosion, stress, radiation, and speed.",
+    "narration": "Every age imagines war as a contest of commanders, maps, and machines. But beneath every machine is a quieter limit: the metal itself. Gun barrels erode. Turbine blades creep. Plutonium changes shape. Titanium cracks when touched by the wrong tools. This film follows four moments when conflict forced metallurgy to move faster than theory, and when a laboratory answer became an industrial inheritance.",
+    "required_visuals": [
+      "molten metal",
+      "wartime factories",
+      "microscope alloy structure",
+      "archival weapons production",
+      "industrial furnaces"
+    ],
+    "emotional_intensity": 0.9,
+    "citations": [
+      {
+        "title": "100 Years Of Stainless Steel",
+        "url": "https://blog.sciencemuseum.org.uk/100-years-of-stainless-steel/",
+        "publisher": "Science Museum Group",
+        "accessed_at": "2026-05-13"
+      },
+      {
+        "title": "Challenges: Materials",
+        "url": "https://frankwhittle.co.uk/challenges/",
+        "publisher": "Sir Frank Whittle website",
+        "accessed_at": "2026-05-13"
+      },
+      {
+        "title": "Metallurgical Laboratory at the University of Chicago",
+        "url": "https://www.energy.gov/lm/metallurgical-laboratory-university-chicago",
+        "publisher": "U.S. Department of Energy",
+        "accessed_at": "2026-05-13"
+      },
+      {
+        "title": "Lockheed SR-71 Blackbird",
+        "url": "https://airandspace.si.edu/collection-objects/lockheed-sr-71-blackbird/nasm_A19920072000",
+        "publisher": "Smithsonian National Air and Space Museum",
+        "accessed_at": "2026-05-13"
+      }
+    ]
+  },
+  {
+    "id": "stainless-sheffield",
+    "chapter": "Part 1: The Rusted Trench",
+    "claim": "Harry Brearley first cast rustless steel in Sheffield in August 1913 while investigating gun barrel erosion; the discovery became commercially powerful because chromium forms a self-repairing passive surface film.",
+    "narration": "The story begins before the trenches, in Sheffield, where weapon designers were fighting erosion inside gun barrels. Harry Brearley was asked to help find a steel that could withstand hot gases and corrosive attack. His chromium steels did not solve the gun barrel problem in the way his sponsors hoped. But one sample refused to behave. Acid would not bite it properly. Damp air would not stain it. The failed barrel experiment became rustless steel, then stainless steel, and the battlefield problem moved into kitchens, hospitals, engines, and cities.",
+    "required_visuals": [
+      "Sheffield steelworks",
+      "Harry Brearley portrait",
+      "stainless cutlery",
+      "gun barrel erosion",
+      "chromium oxide animation"
+    ],
+    "emotional_intensity": 0.65,
+    "citations": [
+      {
+        "title": "100 Years Of Stainless Steel",
+        "url": "https://blog.sciencemuseum.org.uk/100-years-of-stainless-steel/",
+        "publisher": "Science Museum Group",
+        "accessed_at": "2026-05-13"
+      }
+    ]
+  },
+  {
+    "id": "jet-superalloys",
+    "chapter": "Part 2: The Fire of the Turbine",
+    "claim": "World War II turbojet development became a high-temperature alloy race: British nickel-chromium Nimonic alloys enabled Whittle-era turbines, while German production engines relied on axial-flow design, air cooling, and substitution under material shortages.",
+    "narration": "A jet engine is a controlled furnace that must also spin. The hotter it runs, the more useful it becomes, but the turbine blades live at the edge of collapse. In Britain, Whittle faced a material objection as much as an aerodynamic one: no suitable metal seemed able to survive. Nimonic 80 changed the argument, giving jet turbines a nickel-chromium alloy with low creep at high temperature. In Germany, the Jumo 004 became a different kind of triumph: mass production under scarcity, axial compressors, air-cooled turbine hardware, and a brutal service life. The future engine was born from both abundance and substitution.",
+    "required_visuals": [
+      "Frank Whittle",
+      "W2B engine",
+      "Nimonic turbine blade",
+      "Jumo 004 cutaway",
+      "Me 262 archival footage",
+      "heated turbine blade animation"
+    ],
+    "emotional_intensity": 0.82,
+    "citations": [
+      {
+        "title": "Challenges: Materials",
+        "url": "https://frankwhittle.co.uk/challenges/",
+        "publisher": "Sir Frank Whittle website",
+        "accessed_at": "2026-05-13"
+      },
+      {
+        "title": "Junkers Jumo 004 Turbojet",
+        "url": "https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/196238/AFmuseum/junkers-jumo-004-turbojet/",
+        "publisher": "National Museum of the United States Air Force",
+        "accessed_at": "2026-05-13"
+      }
+    ]
+  },
+  {
+    "id": "atomic-metallurgy",
+    "chapter": "Part 3: Atomic Alchemy",
+    "claim": "The Manhattan Project required metallurgy at the edge of knowledge: plutonium production, chemical separation, and rapid alloy development to tame a metal with multiple phases.",
+    "narration": "At Chicago, the name Metallurgical Laboratory was a cover story and a technical description at once. The project had to create plutonium, separate it, understand it, and fabricate it before the science had settled. Plutonium was not an ordinary metal waiting to be machined. It shifted between phases with dramatic changes in density and behavior. The problem was no longer just strength or corrosion. It was the stability of matter under secrecy and deadline. Gallium stabilization of the delta phase became one of the crucial metallurgical answers, turning a strange element into something that could be fabricated for the implosion design.",
+    "required_visuals": [
+      "Chicago Pile-1",
+      "Met Lab",
+      "Hanford T Plant",
+      "Los Alamos archival",
+      "plutonium phase animation",
+      "abstract atomic lattice"
+    ],
+    "emotional_intensity": 0.88,
+    "citations": [
+      {
+        "title": "Metallurgical Laboratory at the University of Chicago",
+        "url": "https://www.energy.gov/lm/metallurgical-laboratory-university-chicago",
+        "publisher": "U.S. Department of Energy",
+        "accessed_at": "2026-05-13"
+      },
+      {
+        "title": "Producing Plutonium",
+        "url": "https://www.nps.gov/mapr/learn/plutonium.htm",
+        "publisher": "National Park Service",
+        "accessed_at": "2026-05-13"
+      },
+      {
+        "title": "The Taming of Plutonium: Pu Metallurgy and the Manhattan Project",
+        "url": "https://arxiv.org/abs/2103.06226",
+        "publisher": "arXiv / Los Alamos authors",
+        "accessed_at": "2026-05-13"
+      }
+    ]
+  },
+  {
+    "id": "titanium-phantom",
+    "chapter": "Part 4: The Titanium Phantom",
+    "claim": "The Blackbird family pushed aircraft structure into titanium because Mach 3 flight heated conventional airframes beyond their comfort zone; the program forced advances in titanium fabrication and high-speed systems.",
+    "narration": "By the Cold War, the problem was no longer a barrel or a blade. It was the skin of an aircraft moving faster than rifle bullets, high enough to see the curve of the Earth, hot enough to weaken aluminum. The A-12 and SR-71 turned titanium into a strategic material. The CIA describes the A-12 as a machine of extreme speed and altitude, and the Smithsonian records the SR-71 as an aircraft built largely from titanium and its alloys. At Mach 3, heat became architecture. Fuel tanks leaked when cold and sealed when hot. The aircraft was not merely flown; it was thermally transformed.",
+    "required_visuals": [
+      "A-12 Oxcart",
+      "SR-71 Blackbird",
+      "Skunk Works",
+      "titanium sheet fabrication",
+      "Mach 3 heat map",
+      "aerial refueling"
+    ],
+    "emotional_intensity": 0.9,
+    "citations": [
+      {
+        "title": "A-12 Oxcart",
+        "url": "https://www.cia.gov/legacy/headquarters/a-12-oxcart/",
+        "publisher": "Central Intelligence Agency",
+        "accessed_at": "2026-05-13"
+      },
+      {
+        "title": "Lockheed SR-71 Blackbird",
+        "url": "https://airandspace.si.edu/collection-objects/lockheed-sr-71-blackbird/nasm_A19920072000",
+        "publisher": "Smithsonian National Air and Space Museum",
+        "accessed_at": "2026-05-13"
+      },
+      {
+        "title": "Lockheed SR-71A",
+        "url": "https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/198054/AFmuseum/lockheed-sr-71a/",
+        "publisher": "National Museum of the United States Air Force",
+        "accessed_at": "2026-05-13"
+      }
+    ]
+  },
+  {
+    "id": "legacy-modern-alloys",
+    "chapter": "Part 5: The Industrial Inheritance",
+    "claim": "Wartime alloy experiments escaped their original contexts and became ordinary foundations of modern aviation, medicine, architecture, energy systems, and manufacturing.",
+    "narration": "The final image is not a weapon. It is a hospital instrument, a turbine blade, a spacecraft bracket, a kitchen sink, a chemical plant, a surgical implant, a jet crossing an ocean. War did not make these materials morally simple. It made them urgent. Stainless steel, superalloys, nuclear metallurgy, and titanium fabrication show the same pattern: conflict compresses time, industry absorbs the lesson, and civilians inherit the material world that follows. The crucible cools. The alloy remains.",
+    "required_visuals": [
+      "modern jet turbine",
+      "surgical instruments",
+      "stainless architecture",
+      "spacecraft manufacturing",
+      "titanium implant",
+      "factory montage"
+    ],
+    "emotional_intensity": 0.7,
+    "citations": [
+      {
+        "title": "100 Years Of Stainless Steel",
+        "url": "https://blog.sciencemuseum.org.uk/100-years-of-stainless-steel/",
+        "publisher": "Science Museum Group",
+        "accessed_at": "2026-05-13"
+      },
+      {
+        "title": "Challenges: Materials",
+        "url": "https://frankwhittle.co.uk/challenges/",
+        "publisher": "Sir Frank Whittle website",
+        "accessed_at": "2026-05-13"
+      },
+      {
+        "title": "Lockheed SR-71 Blackbird",
+        "url": "https://airandspace.si.edu/collection-objects/lockheed-sr-71-blackbird/nasm_A19920072000",
+        "publisher": "Smithsonian National Air and Space Museum",
+        "accessed_at": "2026-05-13"
+      }
+    ]
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "topic": "The Metallurgical Crucible: Wartime Material Experiments and the Evolution of Modern Alloys",
+  "target_duration_seconds": 1200,
+  "thesis": "Modern conflict repeatedly turned material limits into engineering deadlines, and the alloys born under wartime pressure became the foundation of modern aerospace, medicine, nuclear engineering, and industrial life.",
+  "audience": "curious documentary viewers who like military history, engineering, and science storytelling",
+  "mood": "tense archival, technical, cinematic, sober",
+  "pacing": "five-act documentary with strong cold open, measured technical explanation, and high-intensity transitions between alloy stories",
+  "preset": "military_history",
+  "budget_cap_usd": 25.0,
+  "allowed_providers": [
+    "dvids",
+    "nara",
+    "nasa",
+    "wikimedia_commons",
+    "pexels",
+    "internet_archive",
+    "user_upload"
+  ],
+  "output_profile": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 24,
+    "format": "mp4"
+  },
+  "constraints": [
+    "Use rights-cleared archival footage and museum/open-access imagery first.",
+    "Use generated video only for microscopic alloy animations and abstract transitions after approval.",
+    "Avoid operational weapon-making instructions; focus on history, material science, and industrial consequences.",
+    "No unauthorized YouTube downloads.",
+    "Final render blocked until real media assets and rights records are attached."
+  ]
+}

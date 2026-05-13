@@ -1,0 +1,56 @@
+{
+  "science_museum_stainless": {
+    "title": "100 Years Of Stainless Steel",
+    "url": "https://blog.sciencemuseum.org.uk/100-years-of-stainless-steel/",
+    "publisher": "Science Museum Group",
+    "accessed_at": "2026-05-13"
+  },
+  "whittle_nimonic": {
+    "title": "Challenges: Materials",
+    "url": "https://frankwhittle.co.uk/challenges/",
+    "publisher": "Sir Frank Whittle website",
+    "accessed_at": "2026-05-13"
+  },
+  "jumo_usaf": {
+    "title": "Junkers Jumo 004 Turbojet",
+    "url": "https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/196238/AFmuseum/junkers-jumo-004-turbojet/",
+    "publisher": "National Museum of the United States Air Force",
+    "accessed_at": "2026-05-13"
+  },
+  "met_lab_doe": {
+    "title": "Metallurgical Laboratory at the University of Chicago",
+    "url": "https://www.energy.gov/lm/metallurgical-laboratory-university-chicago",
+    "publisher": "U.S. Department of Energy",
+    "accessed_at": "2026-05-13"
+  },
+  "plutonium_nps": {
+    "title": "Producing Plutonium",
+    "url": "https://www.nps.gov/mapr/learn/plutonium.htm",
+    "publisher": "National Park Service",
+    "accessed_at": "2026-05-13"
+  },
+  "pu_arxiv": {
+    "title": "The Taming of Plutonium: Pu Metallurgy and the Manhattan Project",
+    "url": "https://arxiv.org/abs/2103.06226",
+    "publisher": "arXiv / Los Alamos authors",
+    "accessed_at": "2026-05-13"
+  },
+  "sr71_smithsonian": {
+    "title": "Lockheed SR-71 Blackbird",
+    "url": "https://airandspace.si.edu/collection-objects/lockheed-sr-71-blackbird/nasm_A19920072000",
+    "publisher": "Smithsonian National Air and Space Museum",
+    "accessed_at": "2026-05-13"
+  },
+  "sr71_usaf": {
+    "title": "Lockheed SR-71A",
+    "url": "https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/198054/AFmuseum/lockheed-sr-71a/",
+    "publisher": "National Museum of the United States Air Force",
+    "accessed_at": "2026-05-13"
+  },
+  "a12_cia": {
+    "title": "A-12 Oxcart",
+    "url": "https://www.cia.gov/legacy/headquarters/a-12-oxcart/",
+    "publisher": "Central Intelligence Agency",
+    "accessed_at": "2026-05-13"
+  }
+}

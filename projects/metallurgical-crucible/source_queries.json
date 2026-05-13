@@ -1,0 +1,45 @@
+{
+  "dvids": [
+    "steel manufacturing b-roll",
+    "military industrial production archival",
+    "aircraft maintenance turbine engine b-roll",
+    "SR-71 Blackbird museum footage"
+  ],
+  "nara": [
+    "World War I steel production film",
+    "World War II aircraft engine production film",
+    "Manhattan Project Hanford Los Alamos film",
+    "Cold War reconnaissance aircraft footage"
+  ],
+  "nasa": [
+    "SR-71 high speed research Dryden footage",
+    "SR-71 Blackbird NASA image",
+    "titanium aerospace manufacturing"
+  ],
+  "wikimedia_commons": [
+    "Harry Brearley stainless steel",
+    "Junkers Jumo 004",
+    "Frank Whittle W.1 engine",
+    "Chicago Pile-1",
+    "Hanford T Plant",
+    "Lockheed SR-71 Blackbird"
+  ],
+  "pexels": [
+    "The Metallurgical Crucible: Wartime Material Experiments and the Evolution of Modern Alloys abstract",
+    "control room",
+    "radar screen"
+  ],
+  "internet_archive": [
+    "The Metallurgical Crucible: Wartime Material Experiments and the Evolution of Modern Alloys",
+    "The Metallurgical Crucible: Wartime Material Experiments and the Evolution of Modern Alloys newsreel",
+    "The Metallurgical Crucible: Wartime Material Experiments and the Evolution of Modern Alloys public domain film"
+  ],
+  "preset": [
+    "military history"
+  ],
+  "smithsonian_open_access": [
+    "Lockheed SR-71 Blackbird NASM open access",
+    "Junkers Jumo 004 B Smithsonian open access",
+    "Whittle engine Smithsonian open access"
+  ]
+}

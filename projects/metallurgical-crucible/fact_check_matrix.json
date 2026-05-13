@@ -1,0 +1,66 @@
+[
+  {
+    "beat_id": "cold-open-crucible",
+    "claim": "The decisive constraint behind many military breakthroughs was not strategy alone, but whether materials could survive heat, corrosion, stress, radiation, and speed.",
+    "status": "source_attached",
+    "citation_urls": [
+      "https://blog.sciencemuseum.org.uk/100-years-of-stainless-steel/",
+      "https://frankwhittle.co.uk/challenges/",
+      "https://www.energy.gov/lm/metallurgical-laboratory-university-chicago",
+      "https://airandspace.si.edu/collection-objects/lockheed-sr-71-blackbird/nasm_A19920072000"
+    ],
+    "fact_check_notes": "Verify exact wording against cited sources before final voice recording; current claim is supported at package level but not line-edited for narration."
+  },
+  {
+    "beat_id": "stainless-sheffield",
+    "claim": "Harry Brearley first cast rustless steel in Sheffield in August 1913 while investigating gun barrel erosion; the discovery became commercially powerful because chromium forms a self-repairing passive surface film.",
+    "status": "source_attached",
+    "citation_urls": [
+      "https://blog.sciencemuseum.org.uk/100-years-of-stainless-steel/"
+    ],
+    "fact_check_notes": "Verify exact wording against cited sources before final voice recording; current claim is supported at package level but not line-edited for narration."
+  },
+  {
+    "beat_id": "jet-superalloys",
+    "claim": "World War II turbojet development became a high-temperature alloy race: British nickel-chromium Nimonic alloys enabled Whittle-era turbines, while German production engines relied on axial-flow design, air cooling, and substitution under material shortages.",
+    "status": "source_attached",
+    "citation_urls": [
+      "https://frankwhittle.co.uk/challenges/",
+      "https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/196238/AFmuseum/junkers-jumo-004-turbojet/"
+    ],
+    "fact_check_notes": "Verify exact wording against cited sources before final voice recording; current claim is supported at package level but not line-edited for narration."
+  },
+  {
+    "beat_id": "atomic-metallurgy",
+    "claim": "The Manhattan Project required metallurgy at the edge of knowledge: plutonium production, chemical separation, and rapid alloy development to tame a metal with multiple phases.",
+    "status": "source_attached",
+    "citation_urls": [
+      "https://www.energy.gov/lm/metallurgical-laboratory-university-chicago",
+      "https://www.nps.gov/mapr/learn/plutonium.htm",
+      "https://arxiv.org/abs/2103.06226"
+    ],
+    "fact_check_notes": "Verify exact wording against cited sources before final voice recording; current claim is supported at package level but not line-edited for narration."
+  },
+  {
+    "beat_id": "titanium-phantom",
+    "claim": "The Blackbird family pushed aircraft structure into titanium because Mach 3 flight heated conventional airframes beyond their comfort zone; the program forced advances in titanium fabrication and high-speed systems.",
+    "status": "source_attached",
+    "citation_urls": [
+      "https://www.cia.gov/legacy/headquarters/a-12-oxcart/",
+      "https://airandspace.si.edu/collection-objects/lockheed-sr-71-blackbird/nasm_A19920072000",
+      "https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/198054/AFmuseum/lockheed-sr-71a/"
+    ],
+    "fact_check_notes": "Verify exact wording against cited sources before final voice recording; current claim is supported at package level but not line-edited for narration."
+  },
+  {
+    "beat_id": "legacy-modern-alloys",
+    "claim": "Wartime alloy experiments escaped their original contexts and became ordinary foundations of modern aviation, medicine, architecture, energy systems, and manufacturing.",
+    "status": "source_attached",
+    "citation_urls": [
+      "https://blog.sciencemuseum.org.uk/100-years-of-stainless-steel/",
+      "https://frankwhittle.co.uk/challenges/",
+      "https://airandspace.si.edu/collection-objects/lockheed-sr-71-blackbird/nasm_A19920072000"
+    ],
+    "fact_check_notes": "Verify exact wording against cited sources before final voice recording; current claim is supported at package level but not line-edited for narration."
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "gate_type": "source_assets",
+    "risk": "production",
+    "decision": "blocked",
+    "approver": "system",
+    "timestamp": "2026-05-13T18:35:11.430603+00:00",
+    "notes": [
+      "No source assets attached; final render is blocked until rights-cleared media is ingested"
+    ]
+  },
+  {
+    "gate_type": "rights_ledger",
+    "risk": "legal",
+    "decision": "passed",
+    "approver": "system",
+    "timestamp": "2026-05-13T18:35:11.430603+00:00",
+    "notes": [
+      "All source assets have approved rights records"
+    ]
+  },
+  {
+    "gate_type": "missing_media",
+    "risk": "render",
+    "decision": "passed",
+    "approver": "system",
+    "timestamp": "2026-05-13T18:35:11.430603+00:00",
+    "notes": [
+      "All referenced local media paths exist"
+    ]
+  },
+  {
+    "gate_type": "citation_coverage",
+    "risk": "factual",
+    "decision": "passed",
+    "approver": "system",
+    "timestamp": "2026-05-13T18:35:11.430603+00:00",
+    "notes": [
+      "All beats with claims include citations"
+    ]
+  },
+  {
+    "gate_type": "timeline_integrity",
+    "risk": "edit",
+    "decision": "passed",
+    "approver": "system",
+    "timestamp": "2026-05-13T18:35:11.430603+00:00",
+    "notes": [
+      "Timeline references resolvable source assets"
+    ]
+  },
+  {
+    "gate_type": "duplicate_clip_overuse",
+    "risk": "quality",
+    "decision": "passed",
+    "approver": "system",
+    "timestamp": "2026-05-13T18:35:11.430603+00:00",
+    "notes": [
+      "No clip is overused"
+    ]
+  },
+  {
+    "gate_type": "unsafe_operational_detail",
+    "risk": "safety",
+    "decision": "passed",
+    "approver": "system",
+    "timestamp": "2026-05-13T18:35:11.430603+00:00",
+    "notes": [
+      "No operational weapon, evasion, or targeting instructions detected"
+    ]
+  }
+]

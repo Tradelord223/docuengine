@@ -18,6 +18,19 @@ def run_quality_gates(
     policy = RightsPolicy()
     gates: list[ReviewGate] = []
 
+    gates.append(
+        ReviewGate(
+            gate_type="source_assets",
+            risk="production",
+            decision="blocked" if not assets else "passed",
+            approver="system",
+            timestamp=now,
+            notes=["No source assets attached; final render is blocked until rights-cleared media is ingested"]
+            if not assets
+            else [f"{len(assets)} source asset(s) attached"],
+        )
+    )
+
     rights_notes: list[str] = []
     for asset in assets:
         decision = policy.validate_asset(asset, project)
@@ -128,4 +141,3 @@ def _unsafe_operational_detail(beats: list[BeatPlan]) -> list[str]:
             if phrase in haystack:
                 findings.append(f"{beat.id}: contains '{phrase}'")
     return findings
-

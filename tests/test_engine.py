@@ -196,6 +196,14 @@ class DocumentaryEngineTests(unittest.TestCase):
             self.assertIn("rights_ledger", failed)
             self.assertIn("citation_coverage", failed)
 
+    def test_quality_gates_block_projects_without_source_assets(self):
+        timeline = plan_timeline(self.project(), [self.beat()], [])
+
+        gates = run_quality_gates(self.project(), [], timeline, [self.beat()])
+
+        source_gate = next(gate for gate in gates if gate.gate_type == "source_assets")
+        self.assertEqual(source_gate.decision, "blocked")
+
     def test_demo_cli_writes_project_artifacts(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             code = main(["demo", "--out", tmpdir, "--topic", "radar deception in modern warfare"])
