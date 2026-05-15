@@ -205,7 +205,7 @@ def _build_clip_index(project_dir: Path) -> int:
     project = _project_from_dict(_read_json(project_dir / "project.json"))
     assets = _read_assets_if_present(project_dir / "assets.json")
     beats = [_beat_from_dict(item) for item in _read_json(project_dir / "beat_plan.json")]
-    clips = build_clip_index(project, assets, beats)
+    clips = build_clip_index(project, assets, beats, project_dir=project_dir)
     timeline = plan_timeline(project, beats, clips)
     gates = run_quality_gates(project, assets, timeline, beats)
 

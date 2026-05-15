@@ -24,3 +24,5 @@ Then build the rough clip index and refreshed timeline:
 python3 -m docuengine build-clip-index \
   --project-dir projects/metallurgical-crucible
 ```
+
+For higher precision, add transcript or scene sidecars under `sidecars/` and reference them from each asset metadata object. See `../../docs/SIDECAR_INDEXING.md`.

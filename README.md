@@ -50,6 +50,8 @@ python3 -m docuengine build-clip-index \
 
 This writes `clip_index.json`, refreshes `timeline.json`, and re-runs `review_gates.json`. It uses asset metadata first, so it remains lightweight until you add real scene detection or transcript sidecars.
 
+For precise timing, attach transcript or scene JSON sidecars to asset metadata. See `docs/SIDECAR_INDEXING.md`.
+
 The demo writes:
 
 - `project.json`

@@ -20,7 +20,18 @@ DocuEngine should ingest rights-cleared real footage, build a source ledger, cre
 - Core tests pass with `python3 -m unittest discover`.
 - The CLI can generate a demo project artifact set.
 - The CLI can export `.fcpxml` from project artifacts.
+- The CLI can ingest a Google Drive media ledger without storing large originals in git.
+- The CLI can build a rough metadata clip index and upgrade it with transcript/scene sidecars when available.
+- The project can produce a usable rough-cut timeline from rights-approved assets and cited beats.
 - Every source asset carries a rights record.
 - Review gates report legal, factual, render, timeline, duplication, and safety risks.
+- Final Cut Pro handoff artifacts are generated without requiring paid video APIs.
 - The repo remains private until explicitly approved otherwise.
 
+## Current Production Gap Queue
+
+1. Sidecar indexing for transcripts, scene detection, and manual time ranges.
+2. Stronger FCPXML handoff with media role metadata and proxy/original path handling.
+3. Render readiness checks that summarize what blocks final export.
+4. Project-level command that runs the whole local pipeline in order.
+5. First real Metallurgical Crucible asset pass from the Drive ledger.

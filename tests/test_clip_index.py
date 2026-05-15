@@ -122,6 +122,77 @@ class ClipIndexTests(unittest.TestCase):
             self.assertEqual(timeline["tracks"][0]["clips"][0]["source_asset_id"], "sr-71-nasa-flight")
             self.assertEqual({gate["gate_type"]: gate["decision"] for gate in gates}["timeline_integrity"], "passed")
 
+    def test_build_clip_index_uses_transcript_sidecar_for_timed_segments(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            project_dir = Path(tmpdir)
+            sidecars = project_dir / "sidecars"
+            sidecars.mkdir()
+            (sidecars / "sr71.transcript.json").write_text(
+                json.dumps(
+                    {
+                        "segments": [
+                            {
+                                "start": 3.5,
+                                "end": 9.0,
+                                "text": "The SR-71 used titanium to survive extreme runway-to-Mach heat cycles.",
+                            },
+                            {
+                                "start": 12.0,
+                                "end": 18.0,
+                                "text": "Cadmium tools and chlorinated water could damage the Blackbird airframe.",
+                            },
+                        ]
+                    },
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+            asset = self.asset(
+                metadata={
+                    **self.asset().metadata,
+                    "transcript_path": "sidecars/sr71.transcript.json",
+                }
+            )
+
+            clips = build_clip_index(self.project(), [asset], [self.beat()], project_dir=project_dir)
+
+            self.assertEqual([clip.id for clip in clips], ["sr-71-nasa-flight-transcript-1", "sr-71-nasa-flight-transcript-2"])
+            self.assertEqual(clips[0].start_seconds, 3.5)
+            self.assertEqual(clips[0].end_seconds, 9.0)
+            self.assertIn("titanium", clips[0].semantic_tags)
+            self.assertIn("chlorinated", clips[1].transcript)
+
+    def test_build_clip_index_uses_scene_sidecar_when_no_transcript_sidecar_exists(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            project_dir = Path(tmpdir)
+            sidecars = project_dir / "sidecars"
+            sidecars.mkdir()
+            (sidecars / "sr71.scenes.json").write_text(
+                json.dumps(
+                    {
+                        "scenes": [
+                            {"start_seconds": 0.0, "end_seconds": 7.25},
+                            {"start_seconds": 7.25, "end_seconds": 15.0},
+                        ]
+                    },
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+            asset = self.asset(
+                metadata={
+                    **self.asset().metadata,
+                    "scenes_path": "sidecars/sr71.scenes.json",
+                }
+            )
+
+            clips = build_clip_index(self.project(), [asset], [self.beat()], project_dir=project_dir)
+
+            self.assertEqual([clip.id for clip in clips], ["sr-71-nasa-flight-scene-1", "sr-71-nasa-flight-scene-2"])
+            self.assertEqual(clips[1].start_seconds, 7.25)
+            self.assertEqual(clips[1].end_seconds, 15.0)
+            self.assertIn("metadata-derived scene", clips[0].suggested_use)
+
     def _asset_to_dict(self, asset: SourceAsset) -> dict:
         return {
             "id": asset.id,
