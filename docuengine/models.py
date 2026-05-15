@@ -13,9 +13,12 @@ SUPPORTED_PRESETS = {
 }
 
 DEFAULT_PROVIDERS = [
+    "smithsonian",
     "dvids",
+    "usaf",
     "nara",
     "nasa",
+    "science_museum",
     "wikimedia_commons",
     "pexels",
     "internet_archive",
@@ -218,4 +221,3 @@ def to_dict(value: Any) -> Any:
     if isinstance(value, dict):
         return {key: to_dict(item) for key, item in value.items()}
     return value
-

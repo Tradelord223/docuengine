@@ -34,4 +34,4 @@ DocuEngine should ingest rights-cleared real footage, build a source ledger, cre
 2. Stronger FCPXML handoff with media role metadata and proxy/original path handling.
 3. Render readiness checks that summarize what blocks final export.
 4. Project-level command that runs the whole local pipeline in order.
-5. First real Metallurgical Crucible asset pass from the Drive ledger.
+5. First real Metallurgical Crucible asset pass from the Drive ledger once rows are marked ready with source URLs, rights status, and Drive paths.

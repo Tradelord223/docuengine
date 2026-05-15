@@ -120,8 +120,11 @@ See `docs/GOOGLE_DRIVE_MEDIA.md`.
 V1 source providers are:
 
 - DVIDS
+- Smithsonian
+- United States Air Force
 - National Archives
 - NASA media
+- Science Museum
 - Wikimedia Commons
 - Pexels
 - Internet Archive

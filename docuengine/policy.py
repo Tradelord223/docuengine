@@ -66,7 +66,7 @@ class RightsPolicy:
         if asset.rights.attribution.strip():
             required_actions.append("keep_attribution")
 
-        if provider in {"dvids", "nasa", "nara"}:
+        if provider in {"dvids", "nasa", "nara", "usaf"}:
             required_actions.append("no_government_endorsement")
 
         if license_id not in PERMISSIVE_LICENSES and not license_id.startswith("cc-by"):
@@ -95,4 +95,3 @@ class RightsPolicy:
 def _contains_marker(value: str, markers: set[str]) -> bool:
     parts = {part for chunk in value.replace("_", "-").split("-") for part in [chunk]}
     return bool(parts.intersection(markers) or any(marker in value for marker in markers))
-

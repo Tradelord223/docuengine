@@ -35,17 +35,19 @@ class DriveLedgerIngestionTests(unittest.TestCase):
             writer.writeheader()
             writer.writerows(rows)
 
-    def project(self) -> ProjectSpec:
-        return ProjectSpec(
-            topic="metallurgical crucible",
-            target_duration_seconds=1200,
-            thesis="Wartime material experiments shaped modern alloys.",
-            audience="documentary viewers",
-            mood="forensic and cinematic",
-            pacing="measured with high-intensity archival sequences",
-            preset="military_history",
-            allowed_providers=["nasa", "dvids", "nara", "wikimedia_commons", "user_upload"],
-        )
+    def project(self, **overrides) -> ProjectSpec:
+        data = {
+            "topic": "metallurgical crucible",
+            "target_duration_seconds": 1200,
+            "thesis": "Wartime material experiments shaped modern alloys.",
+            "audience": "documentary viewers",
+            "mood": "forensic and cinematic",
+            "pacing": "measured with high-intensity archival sequences",
+            "preset": "military_history",
+            "allowed_providers": ["nasa", "dvids", "nara", "wikimedia_commons", "user_upload"],
+        }
+        data.update(overrides)
+        return ProjectSpec(**data)
 
     def beat(self) -> BeatPlan:
         return BeatPlan(
@@ -141,6 +143,30 @@ class DriveLedgerIngestionTests(unittest.TestCase):
         self.assertEqual(gate_map["source_assets"].decision, "passed")
         self.assertEqual(gate_map["rights_ledger"].decision, "passed")
         self.assertEqual(gate_map["missing_media"].decision, "passed")
+
+    def test_ingest_drive_ledger_normalizes_composite_public_source_provider(self):
+        result = ingest_drive_ledger_csv(
+            self._single_ready_ledger(
+                {
+                    "Asset ID": "SR-71 composite source",
+                    "Status": "ready",
+                    "Provider": "Smithsonian / NASA / USAF / NARA / DVIDS",
+                    "Source URL": "https://airandspace.si.edu/collection-objects/lockheed-sr-71-blackbird",
+                    "Drive Original Path": "My Drive/DocuEngine/metallurgical-crucible/originals/sr71-smithsonian.mov",
+                    "Rights Status": "public_domain",
+                    "Attribution": "Smithsonian National Air and Space Museum",
+                }
+            )
+        )
+
+        self.assertEqual(result.assets[0].provider, "smithsonian")
+        gates = run_quality_gates(
+            self.project(allowed_providers=["smithsonian", "nasa", "dvids", "nara", "wikimedia_commons", "user_upload"]),
+            result.assets,
+            self.timeline(),
+            [self.beat()],
+        )
+        self.assertEqual({gate.gate_type: gate.decision for gate in gates}["rights_ledger"], "passed")
 
     def test_ingest_drive_ledger_cli_updates_project_artifacts_and_review_gates(self):
         with tempfile.TemporaryDirectory() as tmpdir:

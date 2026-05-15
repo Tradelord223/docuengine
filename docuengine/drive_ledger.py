@@ -34,12 +34,19 @@ LICENSE_ALIASES = {
 }
 
 PROVIDER_ALIASES = {
+    "smithsonian": "smithsonian",
+    "smithsonian institution": "smithsonian",
+    "smithsonian national air and space museum": "smithsonian",
     "dvids": "dvids",
     "defense visual information distribution service": "dvids",
+    "usaf": "usaf",
+    "u.s. air force": "usaf",
+    "united states air force": "usaf",
     "nara": "nara",
     "national archives": "nara",
     "national archives and records administration": "nara",
     "nasa": "nasa",
+    "science museum": "science_museum",
     "wikimedia": "wikimedia_commons",
     "wikimedia commons": "wikimedia_commons",
     "commons": "wikimedia_commons",
@@ -150,6 +157,10 @@ def _normalize_provider(value: str) -> str:
     key = value.lower().strip()
     if not key:
         return ""
+    parts = [part.strip() for part in re.split(r"[/,;|]", key) if part.strip()]
+    for part in parts:
+        if part in PROVIDER_ALIASES:
+            return PROVIDER_ALIASES[part]
     return PROVIDER_ALIASES.get(key, re.sub(r"[^a-z0-9]+", "_", key).strip("_"))
 
 
