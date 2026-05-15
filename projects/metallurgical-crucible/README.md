@@ -6,6 +6,11 @@ Important: this is a pre-production package. It has a complete thesis, beat plan
 
 Start with `research_brief.md`, `narration_script.md`, `source_queries.json`, and `review_gates.json`.
 
+The current verified source intake lives in:
+
+- `source_verification.md`
+- `drive_ledger_candidate_rows.csv`
+
 Footage storage should use Google Drive for desktop in Stream mode. See `drive_media_manifest.json` for the intended Drive layout and `../../docs/GOOGLE_DRIVE_MEDIA.md` for the workflow.
 
 Drive-side control ledger: https://docs.google.com/spreadsheets/d/<GOOGLE_SHEET_ID>/edit
