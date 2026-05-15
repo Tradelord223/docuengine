@@ -31,6 +31,17 @@ python3 -m docuengine export-fcpxml \
   --out /tmp/docuengine-demo/project.fcpxml
 ```
 
+When exporting Drive-backed media, point `--media-root` at the local Google Drive for desktop mount or proxy folder:
+
+```bash
+python3 -m docuengine export-fcpxml \
+  --project projects/metallurgical-crucible/project.json \
+  --assets projects/metallurgical-crucible/assets.json \
+  --timeline projects/metallurgical-crucible/timeline.json \
+  --out projects/metallurgical-crucible/metallurgical-crucible.fcpxml \
+  --media-root "/Volumes/GoogleDrive/My Drive"
+```
+
 Import a Google Drive media ledger CSV:
 
 ```bash

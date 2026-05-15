@@ -40,6 +40,7 @@ def main(argv: list[str] | None = None) -> int:
     fcpxml.add_argument("--assets", required=True, help="Path to assets.json")
     fcpxml.add_argument("--timeline", required=True, help="Path to timeline.json")
     fcpxml.add_argument("--out", required=True, help="Path to write .fcpxml")
+    fcpxml.add_argument("--media-root", help="Optional local media root for Drive/proxy-relative paths")
 
     drive_ledger = subparsers.add_parser(
         "ingest-drive-ledger",
@@ -63,6 +64,7 @@ def main(argv: list[str] | None = None) -> int:
             Path(args.assets),
             Path(args.timeline),
             Path(args.out),
+            Path(args.media_root) if args.media_root else None,
         )
     if args.command == "ingest-drive-ledger":
         return _ingest_drive_ledger(Path(args.project_dir), Path(args.ledger_csv))
@@ -167,13 +169,19 @@ def _demo_readme(project: ProjectSpec) -> str:
     )
 
 
-def _export_fcpxml(project_path: Path, assets_path: Path, timeline_path: Path, out_path: Path) -> int:
+def _export_fcpxml(
+    project_path: Path,
+    assets_path: Path,
+    timeline_path: Path,
+    out_path: Path,
+    media_root: Path | None = None,
+) -> int:
     project = _project_from_dict(_read_json(project_path))
     assets = [_asset_from_dict(item) for item in _read_json(assets_path)]
     timeline = _timeline_from_dict(_read_json(timeline_path))
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(build_fcpxml_document(project, assets, timeline), encoding="utf-8")
+    out_path.write_text(build_fcpxml_document(project, assets, timeline, media_root=media_root), encoding="utf-8")
     return 0
 
 

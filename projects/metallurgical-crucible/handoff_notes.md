@@ -10,7 +10,7 @@ This project is currently a pre-production package. Final Cut Pro handoff should
 4. Run `python3 -m docuengine ingest-drive-ledger --project-dir projects/metallurgical-crucible --ledger-csv /path/to/media-ledger-export.csv`.
 5. Run `python3 -m docuengine build-clip-index --project-dir projects/metallurgical-crucible` to create a lightweight rough clip index and first timeline from asset metadata.
 6. Add real scene detection/transcription sidecars for higher precision.
-7. Export `.fcpxml` for Final Cut Pro.
+7. Export `.fcpxml` for Final Cut Pro with `--media-root` pointing at the Google Drive for desktop mount.
 8. Send the project to Logic Pro for dialogue/music/sound finishing after picture lock.
 
 ## Why No FCPXML Yet

@@ -89,6 +89,29 @@ class FcpXmlExportTests(unittest.TestCase):
         self.assertEqual(root.find("./resources/asset").attrib["src"], "file:///tmp/source%20clip.mp4")
         self.assertEqual(root.find("./library/event/project/sequence/spine/asset-clip").attrib["role"], "video")
 
+    def test_builds_fcpxml_with_google_drive_proxy_path_and_media_root(self):
+        asset = self.asset()
+        asset.local_path = "My Drive/DocuEngine/metallurgical-crucible/originals/sr71.mov"
+        asset.metadata = {
+            "title": "SR-71 Proxy",
+            "storage": "google_drive",
+            "drive_original_path": "My Drive/DocuEngine/metallurgical-crucible/originals/sr71.mov",
+            "drive_proxy_path": "My Drive/DocuEngine/metallurgical-crucible/proxies/sr71-proxy.mp4",
+        }
+
+        xml_text = build_fcpxml_document(
+            self.project(),
+            [asset],
+            self.timeline(),
+            media_root="/Volumes/GoogleDrive/My Drive",
+        )
+
+        root = ElementTree.fromstring(xml_text)
+        self.assertEqual(
+            root.find("./resources/asset").attrib["src"],
+            "file:///Volumes/GoogleDrive/My%20Drive/DocuEngine/metallurgical-crucible/proxies/sr71-proxy.mp4",
+        )
+
     def test_cli_exports_fcpxml_from_demo_artifacts(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             self.assertEqual(main(["demo", "--out", tmpdir, "--topic", "radar deception"]), 0)
@@ -111,6 +134,71 @@ class FcpXmlExportTests(unittest.TestCase):
             self.assertEqual(code, 0)
             parsed = ElementTree.fromstring(output.read_text())
             self.assertEqual(parsed.tag, "fcpxml")
+
+    def test_cli_exports_fcpxml_with_media_root(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            project = self.project()
+            asset = self.asset()
+            asset.local_path = "My Drive/DocuEngine/metallurgical-crucible/originals/sr71.mov"
+            asset.metadata = {
+                "title": "SR-71 Proxy",
+                "storage": "google_drive",
+                "drive_proxy_path": "My Drive/DocuEngine/metallurgical-crucible/proxies/sr71-proxy.mp4",
+            }
+            output = Path(tmpdir) / "project.fcpxml"
+            (Path(tmpdir) / "project.json").write_text(json.dumps(project.__dict__, indent=2), encoding="utf-8")
+            (Path(tmpdir) / "assets.json").write_text(json.dumps([self._asset_to_dict(asset)], indent=2), encoding="utf-8")
+            (Path(tmpdir) / "timeline.json").write_text(json.dumps(self._timeline_to_dict(self.timeline()), indent=2), encoding="utf-8")
+
+            code = main(
+                [
+                    "export-fcpxml",
+                    "--project",
+                    str(Path(tmpdir) / "project.json"),
+                    "--assets",
+                    str(Path(tmpdir) / "assets.json"),
+                    "--timeline",
+                    str(Path(tmpdir) / "timeline.json"),
+                    "--out",
+                    str(output),
+                    "--media-root",
+                    "/Volumes/GoogleDrive/My Drive",
+                ]
+            )
+
+            self.assertEqual(code, 0)
+            parsed = ElementTree.fromstring(output.read_text())
+            self.assertIn("/Volumes/GoogleDrive/My%20Drive/DocuEngine", parsed.find("./resources/asset").attrib["src"])
+
+    def _asset_to_dict(self, asset):
+        return {
+            "id": asset.id,
+            "local_path": asset.local_path,
+            "source_url": asset.source_url,
+            "media_type": asset.media_type,
+            "provider": asset.provider,
+            "metadata": asset.metadata,
+            "checksum": asset.checksum,
+            "rights": asset.rights.__dict__,
+        }
+
+    def _timeline_to_dict(self, timeline):
+        return {
+            "project_topic": timeline.project_topic,
+            "target_duration_seconds": timeline.target_duration_seconds,
+            "render_profile": timeline.render_profile,
+            "tracks": [
+                {
+                    "name": track.name,
+                    "kind": track.kind,
+                    "clips": [clip.__dict__ for clip in track.clips],
+                }
+                for track in timeline.tracks
+            ],
+            "overlays": [],
+            "generated_inserts": [],
+            "otio": timeline.otio,
+        }
 
 
 if __name__ == "__main__":

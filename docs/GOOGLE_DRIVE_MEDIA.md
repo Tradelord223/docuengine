@@ -91,3 +91,18 @@ Expected ledger columns:
 - `Notes`
 
 Cloud-backed assets pass the missing-media gate when they include a Drive original path, Drive proxy path, Drive file ID, or `My Drive/` path. Final Cut Pro may still download/cache selected media when opening an edit.
+
+## Final Cut Pro Export With Drive Paths
+
+When exporting `.fcpxml`, use `--media-root` to map ledger paths such as `My Drive/DocuEngine/...` to the local Google Drive for desktop mount:
+
+```bash
+python3 -m docuengine export-fcpxml \
+  --project projects/metallurgical-crucible/project.json \
+  --assets projects/metallurgical-crucible/assets.json \
+  --timeline projects/metallurgical-crucible/timeline.json \
+  --out projects/metallurgical-crucible/metallurgical-crucible.fcpxml \
+  --media-root "/Volumes/GoogleDrive/My Drive"
+```
+
+The exporter prefers `drive_proxy_path` over `drive_original_path` so rough cuts stay lightweight.

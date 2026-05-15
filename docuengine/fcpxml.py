@@ -27,6 +27,7 @@ def build_fcpxml_document(
     assets: list[SourceAsset],
     timeline: TimelinePlan,
     version: str = "1.10",
+    media_root: str | Path | None = None,
 ) -> str:
     fps = int(project.output_profile.get("fps", timeline.render_profile.get("fps", 24)))
     width = int(project.output_profile.get("width", timeline.render_profile.get("width", 1920)))
@@ -57,7 +58,7 @@ def build_fcpxml_document(
             {
                 "id": asset_ref_by_id[asset.id],
                 "name": asset.metadata.get("title", asset.id),
-                "src": _file_url(asset.local_path),
+                "src": _file_url(_asset_media_path(asset, media_root)),
                 "start": "0s",
                 "hasVideo": "1" if asset.media_type == "video" else "0",
                 "hasAudio": "1" if asset.media_type in {"video", "audio"} else "0",
@@ -116,7 +117,33 @@ def _timeline_duration(timeline: TimelinePlan) -> float:
     return max(ends or [0.0])
 
 
-def _file_url(path: str) -> str:
+def _asset_media_path(asset: SourceAsset, media_root: str | Path | None = None) -> str:
+    metadata = asset.metadata or {}
+    path = str(
+        metadata.get("resolved_proxy_path")
+        or metadata.get("fcp_proxy_path")
+        or metadata.get("drive_proxy_path")
+        or metadata.get("resolved_original_path")
+        or metadata.get("drive_original_path")
+        or asset.local_path
+    )
+    if media_root:
+        return str(_resolve_media_root(path, media_root))
+    return path
+
+
+def _resolve_media_root(path: str, media_root: str | Path) -> Path:
+    candidate = Path(path).expanduser()
+    if candidate.is_absolute():
+        return candidate
+    root = Path(media_root).expanduser()
+    parts = candidate.parts
+    if parts and parts[0] == "My Drive":
+        return root / Path(*parts[1:])
+    return root / candidate
+
+
+def _file_url(path: str | Path) -> str:
     absolute = Path(path).expanduser().absolute()
     return "file://" + quote(str(absolute))
 
