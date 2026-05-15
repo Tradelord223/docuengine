@@ -55,6 +55,14 @@ def main(argv: list[str] | None = None) -> int:
     )
     clip_index.add_argument("--project-dir", required=True, help="Project artifact directory")
 
+    rough_cut = subparsers.add_parser(
+        "prepare-rough-cut",
+        help="Build clips, timeline, review gates, readiness report, and gated FCPXML export",
+    )
+    rough_cut.add_argument("--project-dir", required=True, help="Project artifact directory")
+    rough_cut.add_argument("--fcpxml-out", help="Path to write .fcpxml; defaults to rough_cut.fcpxml in project dir")
+    rough_cut.add_argument("--media-root", help="Optional local media root for Drive/proxy-relative paths")
+
     args = parser.parse_args(argv)
     if args.command == "demo":
         return _write_demo(Path(args.out), args.topic, args.duration)
@@ -70,6 +78,12 @@ def main(argv: list[str] | None = None) -> int:
         return _ingest_drive_ledger(Path(args.project_dir), Path(args.ledger_csv))
     if args.command == "build-clip-index":
         return _build_clip_index(Path(args.project_dir))
+    if args.command == "prepare-rough-cut":
+        return _prepare_rough_cut(
+            Path(args.project_dir),
+            Path(args.fcpxml_out) if args.fcpxml_out else None,
+            Path(args.media_root) if args.media_root else None,
+        )
     return 2
 
 
@@ -225,6 +239,61 @@ def _build_clip_index(project_dir: Path) -> int:
     for filename, payload in artifacts.items():
         (project_dir / filename).write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     return 0
+
+
+def _prepare_rough_cut(
+    project_dir: Path,
+    fcpxml_out: Path | None = None,
+    media_root: Path | None = None,
+) -> int:
+    project = _project_from_dict(_read_json(project_dir / "project.json"))
+    assets = _read_assets_if_present(project_dir / "assets.json")
+    beats = [_beat_from_dict(item) for item in _read_json(project_dir / "beat_plan.json")]
+    clips = build_clip_index(project, assets, beats, project_dir=project_dir)
+    timeline = plan_timeline(project, beats, clips)
+    gates = run_quality_gates(project, assets, timeline, beats)
+
+    artifacts = {
+        "clip_index.json": to_dict(clips),
+        "timeline.json": to_dict(timeline),
+        "review_gates.json": to_dict(gates),
+    }
+    for filename, payload in artifacts.items():
+        (project_dir / filename).write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+    output = fcpxml_out or (project_dir / "rough_cut.fcpxml")
+    blocked_gates = _rough_cut_blocked_gates(gates, timeline)
+    report = {
+        "status": "blocked" if blocked_gates else "ready_for_final_cut",
+        "blocked_gates": blocked_gates,
+        "asset_count": len(assets),
+        "clip_count": len(clips),
+        "timeline_clip_count": sum(len(track.clips) for track in timeline.tracks),
+        "fcpxml_path": str(output),
+    }
+    if blocked_gates:
+        (project_dir / "rough_cut_report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+        return 1
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(build_fcpxml_document(project, assets, timeline, media_root=media_root), encoding="utf-8")
+    (project_dir / "rough_cut_report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    return 0
+
+
+def _rough_cut_blocked_gates(gates, timeline: TimelinePlan) -> list[str]:
+    required = {
+        "source_assets",
+        "rights_ledger",
+        "missing_media",
+        "citation_coverage",
+        "timeline_integrity",
+        "unsafe_operational_detail",
+    }
+    blocked = [gate.gate_type for gate in gates if gate.gate_type in required and gate.decision == "blocked"]
+    if not any(track.clips for track in timeline.tracks):
+        blocked.append("timeline_clips")
+    return blocked
 
 
 def _read_assets_if_present(path: Path) -> list[SourceAsset]:

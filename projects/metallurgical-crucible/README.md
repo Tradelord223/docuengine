@@ -26,3 +26,12 @@ python3 -m docuengine build-clip-index \
 ```
 
 For higher precision, add transcript or scene sidecars under `sidecars/` and reference them from each asset metadata object. See `../../docs/SIDECAR_INDEXING.md`.
+
+To run the local rough-cut pipeline and export Final Cut Pro XML when gates pass:
+
+```bash
+python3 -m docuengine prepare-rough-cut \
+  --project-dir projects/metallurgical-crucible \
+  --fcpxml-out projects/metallurgical-crucible/metallurgical-crucible.fcpxml \
+  --media-root "/Volumes/GoogleDrive/My Drive"
+```

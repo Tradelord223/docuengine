@@ -63,6 +63,17 @@ This writes `clip_index.json`, refreshes `timeline.json`, and re-runs `review_ga
 
 For precise timing, attach transcript or scene JSON sidecars to asset metadata. See `docs/SIDECAR_INDEXING.md`.
 
+Prepare a gated Final Cut Pro rough cut in one command:
+
+```bash
+python3 -m docuengine prepare-rough-cut \
+  --project-dir projects/metallurgical-crucible \
+  --fcpxml-out projects/metallurgical-crucible/metallurgical-crucible.fcpxml \
+  --media-root "/Volumes/GoogleDrive/My Drive"
+```
+
+This refreshes `clip_index.json`, `timeline.json`, `review_gates.json`, writes `rough_cut_report.json`, and only exports `.fcpxml` when required gates pass.
+
 The demo writes:
 
 - `project.json`
