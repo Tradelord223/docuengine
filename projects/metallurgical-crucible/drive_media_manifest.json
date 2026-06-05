@@ -15,7 +15,7 @@
     "Expect opened Drive files to be cached locally while actively used by editing software."
   ],
   "status": "pending_drive_mount",
-  "drive_root_note": "Replace ACCOUNT/path after Google Drive for desktop is installed and visible in Finder.",
+  "drive_root_note": "Replace the placeholder paths and IDs below with your own after Google Drive for desktop is installed and visible in Finder.",
   "media_policy": {
     "originals": "Store full-resolution source footage in Google Drive originals_dir.",
     "proxies": "Store low-resolution edit proxies in Google Drive proxies_dir or temporary local cache.",

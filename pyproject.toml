@@ -6,8 +6,30 @@ build-backend = "setuptools.build_meta"
 name = "docuengine"
 version = "0.1.0"
 description = "Local-first autonomous documentary editing engine skeleton"
+readme = "README.md"
 requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Caiden Jennings" }]
+keywords = ["documentary", "video-editing", "llm", "fcpxml", "otio", "rights-management"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Multimedia :: Video :: Non-Linear Editor",
+]
+
+[project.urls]
+Homepage = "https://github.com/Tradelord223/docuengine"
+Issues = "https://github.com/Tradelord223/docuengine/issues"
 
 [project.scripts]
 docuengine = "docuengine.cli:main"
 
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.setuptools]
+packages = ["docuengine"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
